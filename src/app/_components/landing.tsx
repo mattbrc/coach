@@ -1,13 +1,30 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/FCsYW1NsrjJ
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+"use client";
+
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { api } from "~/trpc/react";
+import toast from "react-hot-toast";
+import { Icons } from "~/components/icons";
 
 export default function Landing() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+
+  const createSignUp = api.email.create.useMutation({
+    onSuccess: () => {
+      toast.success("Thank you for signing up!");
+      router.refresh();
+      setEmail("");
+    },
+    onError: (e) => {
+      const error = e.message[0];
+      console.log("error email string: ", error);
+    },
+  });
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
@@ -26,14 +43,30 @@ export default function Landing() {
             </p>
           </div>
           <div className="mx-auto max-w-sm space-y-2">
-            <form className="flex space-x-2">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                createSignUp.mutate({ email });
+              }}
+              className="flex space-x-2"
+            >
               <Input
+                type="text"
+                placeholder="bob@bob.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="max-w-lg flex-1"
-                placeholder="Enter your email"
-                type="email"
               />
-              <Button type="submit">Sign Up</Button>
+              <Button type="submit" disabled={createSignUp.isLoading}>
+                {/* {createSignUp.isLoading ? "Signing Up..." : "Sign Up"} */}
+                Sign Up
+              </Button>
             </form>
+            {createSignUp.error?.data?.zodError?.fieldErrors.email?.[0] && (
+              <p className="text-xs text-red-600">
+                {createSignUp.error.data.zodError.fieldErrors.email[0]}
+              </p>
+            )}
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Sign up to get notified when we launch.
               <Link className="underline underline-offset-2" href="#">

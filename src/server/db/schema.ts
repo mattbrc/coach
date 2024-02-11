@@ -32,3 +32,17 @@ export const posts = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+export const signUps = createTable(
+  "signUp",
+  {
+    id: serial("id").primaryKey(),
+    email: varchar("name", { length: 256 }),
+    createdAt: timestamp("created_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (example) => ({
+    emailIndex: index("email_idx").on(example.email),
+  })
+);
