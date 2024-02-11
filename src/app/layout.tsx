@@ -4,6 +4,14 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { Toaster } from "react-hot-toast";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata = {
   title: "Create T3 App",
