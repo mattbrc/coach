@@ -7,9 +7,17 @@ import Landing from "./_components/landing";
 import { Button } from "~/components/ui/button";
 import { Footer } from "~/components/footer";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   noStore();
+  const { userId } = auth();
+  console.log("user id: ", userId);
+
+  if (userId) {
+    redirect("/dashboard");
+  }
 
   return (
     <main>
@@ -19,7 +27,11 @@ export default async function Home() {
             <p className="font-mono text-lg tracking-tighter">Athlana</p>
             <div className="flex gap-2">
               <Button variant="ghost" asChild>
-                <Link href="/sign-in">Login</Link>
+                {userId ? (
+                  <Link href="/dashboard">Login</Link>
+                ) : (
+                  <Link href="/sign-in">Login</Link>
+                )}
               </Button>
               <Button asChild>
                 <Link href="/sign-up">Sign Up</Link>
