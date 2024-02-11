@@ -13,7 +13,7 @@ export default async function Home() {
       <div>
         <header className="sticky top-0 z-40">
           <div className="header-bg container flex h-16 items-center justify-between py-4">
-            <p className="font-extrabold">Athlana</p>
+            <p className="font-mono text-lg tracking-tighter">Athlana</p>
           </div>
         </header>
       </div>

@@ -8,6 +8,8 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import toast from "react-hot-toast";
 import { Icons } from "~/components/icons";
+import { Card } from "~/components/ui/card";
+import { Badge } from "~/components/ui/badge";
 
 export default function Landing() {
   const router = useRouter();
@@ -30,19 +32,17 @@ export default function Landing() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
-              Coming Soon
-            </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Actionable insights for your coaching business.
-            </h2>
-            <p className="mx-auto max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Understand your clients better with powerful analytics and
-              reporting tools. Let data drive your decisions and help your
-              clients achieve their goals.
+            <Badge variant="acid">Coming Soon</Badge>
+            <h1 className="bg-gradient-to-r from-white to-gray-500 bg-clip-text text-3xl font-bold tracking-tighter text-transparent sm:text-5xl xl:text-6xl/none">
+              The Platform for Coaches.
+            </h1>
+            <p className="mx-auto max-w-[600px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Focus on what you do best, we&apos;ll take care of the rest.
+              Virtual coaching, powerful analytics, client engagement +
+              retention, and sales pages.
             </p>
           </div>
-          <div className="mx-auto max-w-sm space-y-2">
+          <div className="mx-auto max-w-sm space-y-2 p-4">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -52,7 +52,7 @@ export default function Landing() {
             >
               <Input
                 type="text"
-                placeholder="bob@bob.com"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="max-w-lg flex-1"
@@ -63,7 +63,7 @@ export default function Landing() {
               </Button>
             </form>
             {createSignUp.error?.data?.zodError?.fieldErrors.email?.[0] && (
-              <p className="text-xs text-red-600">
+              <p className="text-xs text-red-400">
                 {createSignUp.error.data.zodError.fieldErrors.email[0]}
               </p>
             )}
@@ -74,6 +74,55 @@ export default function Landing() {
               </Link> */}
             </p>
           </div>
+          {/* <div className="mx-auto grid max-w-sm items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Seamless Client Management</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Easily manage and monitor your clients&apos; progress in one
+                place
+              </p>
+            </div>
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Real-time Business Insights</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Make informed decisions with AI-driven actionable data to grow
+                your business
+              </p>
+            </div>
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Dynamic Content Creation</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Engage your audience with fresh content
+              </p>
+            </div>
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Virtual Coaching Platform</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Deliver personalized training and consultations through our
+                platform, reaching clients anywhere, anytime, without
+                compromising on the quality of your coaching
+              </p>
+            </div>
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Customizable Product Pages</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Create a stunning online presence in minutes, complete with
+                booking capabilities and automated payments, powered by Stripe
+              </p>
+            </div>
+            <div className="grid gap-1 text-center">
+              <Icons.explore className="mx-auto h-6 w-6 opacity-70" />
+              <h3 className="text-lg font-bold">Client Engagement Tools</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Boost retention with targeted communication
+              </p>
+            </div>
+          </div> */}
         </div>
       </div>
     </section>
