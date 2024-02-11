@@ -69,9 +69,9 @@ export default function Landing() {
             )}
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Sign up to get notified when we launch.
-              <Link className="underline underline-offset-2" href="#">
+              {/* <Link className="underline underline-offset-2" href="#">
                 Terms & Conditions
-              </Link>
+              </Link> */}
             </p>
           </div>
         </div>
